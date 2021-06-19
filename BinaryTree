@@ -1,0 +1,35 @@
+class BinaryTree:
+    def __init__(self, data):
+        self.data= data
+        self.left= None
+        self.right= None
+
+def branchSums(root):
+    sums= []
+    calculateBranchSums(root, 0, sums)
+    return sums
+
+def calculateBranchSums(node, runningSums, sums):
+    if node is None:
+        return
+    
+    newRunningSum= runningSums+ node.data
+    if node.left is None and node.right is None:
+        sums.append(newRunningSum)
+        return
+
+    calculateBranchSums(node.left, newRunningSum, sums)
+    calculateBranchSums(node.right, newRunningSum, sums)
+
+myTree= BinaryTree(10)
+myTree.left= BinaryTree(9)
+myTree.right= BinaryTree(11)
+myTree.left.left= BinaryTree(8)
+myTree.left.right= BinaryTree(20)
+myTree.right.left= BinaryTree(6)
+myTree.right.right= BinaryTree(12)
+#print(myTree.data, myTree.left.data, myTree.right.data)
+
+p= branchSums(myTree)
+print(p)
+
